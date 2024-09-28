@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        CaesarCipher cipher = new CaesarCipher();  // Instancia de CaesarCipher
-        FileManager fileManager = new FileManager();  // Instancia de FileManager
-        Validator validator = new Validator();  // Instancia de Validator
+        CaesarCipher cipher = new CaesarCipher();
+        FileManager fileManager = new FileManager();
+        Validator validator = new Validator();
 
         while (true) {
             // Mostrar menú al usuario
@@ -25,7 +25,7 @@ public class Main {
                     String textoCifrar = scanner.nextLine();
                     System.out.print("Introduce el número de desplazamiento: ");
                     int desplazamientoCifrar = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
+                    scanner.nextLine();
 
                     if (validator.isValidKey(desplazamientoCifrar, cipher.getAlphabet())) {
                         System.out.println("Texto cifrado: " + cipher.encrypt(textoCifrar, desplazamientoCifrar));
@@ -39,7 +39,7 @@ public class Main {
                     String textoDescifrar = scanner.nextLine();
                     System.out.print("Introduce el número de desplazamiento: ");
                     int desplazamientoDescifrar = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
+                    scanner.nextLine();
 
                     if (validator.isValidKey(desplazamientoDescifrar, cipher.getAlphabet())) {
                         System.out.println("Texto descifrado: " + cipher.decrypt(textoDescifrar, desplazamientoDescifrar));
@@ -76,7 +76,7 @@ public class Main {
                     if (validator.isFileExists(filePathDescifrar)) {
                         System.out.print("Introduce el número de desplazamiento: ");
                         int desplazamientoArchivoDescifrar = scanner.nextInt();
-                        scanner.nextLine(); // Consumir el salto de línea
+                        scanner.nextLine();
 
                         if (validator.isValidKey(desplazamientoArchivoDescifrar, cipher.getAlphabet())) {
                             String fileContent = fileManager.readFile(filePathDescifrar);
