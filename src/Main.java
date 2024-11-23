@@ -9,7 +9,7 @@ public class Main {
 
         while (true) {
             // Mostrar menú al usuario
-            System.out.println("Bienvenido al Cifrador César");
+            System.out.println("\nBienvenido al Cifrador César");
             System.out.println("1. Cifrar un mensaje desde consola");
             System.out.println("2. Descifrar un mensaje desde consola");
             System.out.println("3. Cifrar un archivo .txt");
@@ -18,10 +18,10 @@ public class Main {
             System.out.print("Elige una opción: ");
 
             String opcion = scanner.nextLine();
-
+            // revisar saltos de linea
             switch (opcion) {
                 case "1":
-                    System.out.print("Introduce el texto a cifrar: ");
+                    System.out.print("\nIntroduce el texto a cifrar: ");
                     String textoCifrar = scanner.nextLine();
                     System.out.print("Introduce el número de desplazamiento: ");
                     int desplazamientoCifrar = scanner.nextInt();
@@ -35,7 +35,7 @@ public class Main {
                     break;
 
                 case "2":
-                    System.out.print("Introduce el texto a descifrar: ");
+                    System.out.print("\nIntroduce el texto a descifrar: ");
                     String textoDescifrar = scanner.nextLine();
                     System.out.print("Introduce el número de desplazamiento: ");
                     int desplazamientoDescifrar = scanner.nextInt();
@@ -49,13 +49,13 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.print("Introduce la ruta del archivo a cifrar: ");
+                    System.out.print("\nIntroduce la ruta del archivo a cifrar: ");
                     String filePathCifrar = scanner.nextLine();
 
                     if (validator.isFileExists(filePathCifrar)) {
                         System.out.print("Introduce el número de desplazamiento: ");
                         int desplazamientoArchivoCifrar = scanner.nextInt();
-                        scanner.nextLine(); // Consumir el salto de línea
+                        scanner.nextLine();
 
                         if (validator.isValidKey(desplazamientoArchivoCifrar, cipher.getAlphabet())) {
                             String fileContent = fileManager.readFile(filePathCifrar);
@@ -68,9 +68,9 @@ public class Main {
                         System.out.println("El archivo no existe.");
                     }
                     break;
-                //C:\Users\yizuz\Downloads\Ayuda y Proyecto Git\P-CG-M1-JP\src\El programa que jamas corrio
+                //C:\Users\yizuz\Downloads\Ayuda y Proyecto Git\P-CG-M1-JP\Libreria
                 case "4":
-                    System.out.print("Introduce la ruta del archivo a descifrar: ");
+                    System.out.print("\nIntroduce la ruta del archivo a descifrar: ");
                     String filePathDescifrar = scanner.nextLine();
 
                     if (validator.isFileExists(filePathDescifrar)) {
@@ -91,7 +91,7 @@ public class Main {
                     break;
 
                 case "5":
-                    System.out.println("Saliendo del programa...");
+                    System.out.println("\nSaliendo del programa...");
                     scanner.close();
                     return;
 

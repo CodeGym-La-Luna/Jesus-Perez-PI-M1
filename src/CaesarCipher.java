@@ -5,14 +5,13 @@ public class CaesarCipher {
         this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;:',.?/".toCharArray();
     }
 
-    public String encrypt(String text, int shift) {
+    public String encrypt(String text, int key) {
         StringBuilder encryptedText = new StringBuilder();
-        text = text.toUpperCase();
-
+//se retiran la linea de codigo text = text-toUppercase(); para poder tener mas claridad y no exista la conversion de letras de mayusculas a minusculas cuando no se necesitan
         for (char character : text.toCharArray()) {
             int index = findIndex(character);
             if (index != -1) {
-                int newIndex = (index + shift) % alphabet.length;
+                int newIndex = (index + key) % alphabet.length;
                 encryptedText.append(alphabet[newIndex]);
             } else {
                 encryptedText.append(character);
@@ -20,15 +19,14 @@ public class CaesarCipher {
         }
         return encryptedText.toString();
     }
-
-    public String decrypt(String encryptedText, int shift) {
+//tanto el cifrado como el descifrado se remplazo el shift a key para que se detecte la frase que fue cifrada
+    public String decrypt(String encryptedText, int key) {
         StringBuilder decryptedText = new StringBuilder();
-        encryptedText = encryptedText.toUpperCase();
-
+// se retira la misma linea de codigo que en el encriptado
         for (char character : encryptedText.toCharArray()) {
             int index = findIndex(character);
             if (index != -1) {
-                int newIndex = (index - shift + alphabet.length) % alphabet.length;
+                int newIndex = (index - key + alphabet.length) % alphabet.length;
                 decryptedText.append(alphabet[newIndex]);
             } else {
                 decryptedText.append(character);
