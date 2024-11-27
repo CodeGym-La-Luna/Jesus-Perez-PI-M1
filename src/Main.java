@@ -1,5 +1,12 @@
+import java.security.Key;
 import java.util.Scanner;
 
+/**
+ * Clase Principal que ejecuta el programa Cifrado César.
+ * Proporciona un menú para cifrar y descifrar texto desde consola o archivos .txt.
+ * @author Jesús Pérez Noriega.
+ * @version 1.0
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +34,7 @@ public class Main {
                     int desplazamientoCifrar = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (validator.isValidKey(desplazamientoCifrar, cipher.getAlphabet())) {
+                    if (validator.isValidkey(desplazamientoCifrar, cipher.getAlphabet())) {
                         System.out.println("Texto cifrado: " + cipher.encrypt(textoCifrar, desplazamientoCifrar));
                     } else {
                         System.out.println("Clave de desplazamiento no válida.");
@@ -41,7 +48,7 @@ public class Main {
                     int desplazamientoDescifrar = scanner.nextInt();
                     scanner.nextLine();
 
-                    if (validator.isValidKey(desplazamientoDescifrar, cipher.getAlphabet())) {
+                    if (validator.isValidkey(desplazamientoDescifrar, cipher.getAlphabet())) {
                         System.out.println("Texto descifrado: " + cipher.decrypt(textoDescifrar, desplazamientoDescifrar));
                     } else {
                         System.out.println("Clave de desplazamiento no válida.");
@@ -51,42 +58,32 @@ public class Main {
                 case "3":
                     System.out.print("\nIntroduce la ruta del archivo a cifrar: ");
                     String filePathCifrar = scanner.nextLine();
-
-                    if (validator.isFileExists(filePathCifrar)) {
-                        System.out.print("Introduce el número de desplazamiento: ");
-                        int desplazamientoArchivoCifrar = scanner.nextInt();
+                    if (validator.isValidTxtFile(filePathCifrar)) {
+                        System.out.println("Introduce la ruta para guardar el archivo cifrado: ");
+                        String outputPathCifrar = scanner.nextLine();
+                        System.out.println("Introduce el número de desplazamiento: ");
+                        int keyCifrar = scanner.nextInt();
                         scanner.nextLine();
 
-                        if (validator.isValidKey(desplazamientoArchivoCifrar, cipher.getAlphabet())) {
-                            String fileContent = fileManager.readFile(filePathCifrar);
-                            String encryptedContent = cipher.encrypt(fileContent, desplazamientoArchivoCifrar);
-                            fileManager.writeFile(encryptedContent, filePathCifrar.replace(".txt", "_cifrado.txt"), false);
-                        } else {
-                            System.out.println("Clave de desplazamiento no válida.");
+                        if (validator.isValidkey(keyCifrar, cipher.getAlphabet())) {
+                            fileManager.encryptFile(filePathCifrar, outputPathCifrar, keyCifrar);
                         }
-                    } else {
-                        System.out.println("El archivo no existe.");
                     }
                     break;
-                //C:\Users\yizuz\Downloads\Ayuda y Proyecto Git\P-CG-M1-JP\Libreria
+
                 case "4":
                     System.out.print("\nIntroduce la ruta del archivo a descifrar: ");
                     String filePathDescifrar = scanner.nextLine();
-
-                    if (validator.isFileExists(filePathDescifrar)) {
-                        System.out.print("Introduce el número de desplazamiento: ");
-                        int desplazamientoArchivoDescifrar = scanner.nextInt();
+                    if (validator.isValidTxtFile(filePathDescifrar)) {
+                        System.out.println("Introduce la ruta para guardar el archivo descifrado: ");
+                        String outputPathDescifrar = scanner.nextLine();
+                        System.out.println("Introduce el número de desplazamiento: ");
+                        int keyDescifrar = scanner.nextInt();
                         scanner.nextLine();
 
-                        if (validator.isValidKey(desplazamientoArchivoDescifrar, cipher.getAlphabet())) {
-                            String fileContent = fileManager.readFile(filePathDescifrar);
-                            String decryptedContent = cipher.decrypt(fileContent, desplazamientoArchivoDescifrar);
-                            fileManager.writeFile(decryptedContent, filePathDescifrar.replace(".txt", "_descifrado.txt"), false);
-                        } else {
-                            System.out.println("Clave de desplazamiento no válida.");
+                        if (validator.isValidkey(keyDescifrar, cipher.getAlphabet())) {
+                            fileManager.decryptFile(filePathDescifrar, outputPathDescifrar, keyDescifrar);
                         }
-                    } else {
-                        System.out.println("El archivo no existe.");
                     }
                     break;
 
